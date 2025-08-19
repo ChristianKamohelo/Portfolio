@@ -1,0 +1,476 @@
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+:root {
+  --bg-color: #1e1e1e;
+  --text-color: #f5f5f5;
+  --sidebar-bg: #2a2a2a;
+  --sidebar-text: #f5f5f5;
+  --sidebar-hover: #3a3a3a;
+  --accent-color: #4db6ac;
+}
+
+.light-theme {
+  --bg-color: #ffffff;
+  --text-color: #1e1e1e;
+  --sidebar-bg: #f5f5f5;
+  --sidebar-text: #1e1e1e;
+  --sidebar-hover: #e0e0e0;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 250px;
+  background-color: var(--sidebar-bg);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  transition: transform 0.3s ease;
+  z-index: 200;
+}
+
+.sidebar-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 auto 15px auto;
+}
+
+.sidebar-username {
+  text-align: center;
+  font-weight: 600;
+  color: var(--sidebar-text);
+}
+
+.sidebar-role {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--sidebar-text);
+  margin-bottom: 20px;
+}
+
+/* Sidebar menu */
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 14px; /* spacing between items */
+  padding: 0 10px;
+}
+
+.sidebar-menu button {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  font-size: 1rem;
+  border: none;
+  background: none;
+  color: var(--sidebar-text);
+  cursor: pointer;
+  border-radius: 8px;
+  width: 100%;
+  text-align: left;
+  transition: background 0.3s;
+}
+
+.sidebar-menu button:hover {
+  background-color: var(--sidebar-hover);
+}
+
+/* Active state */
+.sidebar-menu button.active {
+  background-color: var(--accent-color);
+  color: #fff;
+}
+
+.sidebar-menu .material-symbols-outlined {
+  font-size: 28px; /* bigger icons */
+}
+
+/* Main content */
+.main-content {
+  margin-left: 250px; /* offset for sidebar */
+  min-height: 100vh;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* horizontal center */
+  justify-content: center; /* vertical center */
+  text-align: center;
+  position: relative; /* for theme toggle positioning */
+}
+
+.cta-buttons {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.contact-btn {
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contact-btn:hover {
+  background-color: #0c57c6;
+}
+
+.social-icons {
+  display: flex;
+  gap: 16px;
+}
+
+.social-icons img {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) invert(1);
+  transition: transform 0.3s;
+}
+
+.social-icons img:hover {
+  transform: scale(1.1);
+}
+
+/* Profile Page Styles */
+.profile-section {
+  max-width: 800px;
+  line-height: 1.6;
+  margin-top: 20px;
+}
+
+.profile-section h2 {
+  margin-bottom: 10px;
+}
+
+.profile-section p {
+  margin-bottom: 15px;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 1.2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Burger Button for Mobile */
+.burger {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 300;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.burger-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.burger-icon {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background-color: var(--text-color);
+  margin-top: 5px;
+  position: relative;
+}
+
+.burger-icon::before,
+.burger-icon::after {
+  content: "";
+  width: 20px;
+  height: 2px;
+  background-color: var(--text-color);
+  position: absolute;
+  left: 0;
+}
+
+.burger-icon::before {
+  top: -6px;
+}
+
+.burger-icon::after {
+  top: 6px;
+}
+
+/* Overlay for Mobile Sidebar */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 150;
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    width: 230px;
+  }
+
+  body.open .sidebar {
+    transform: translateX(0);
+  }
+
+  .burger {
+    display: block;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  body.open .overlay {
+    display: block;
+  }
+}
+
+/* Social icon colors for themes */
+.social-icons img {
+  transition: transform 0.3s, filter 0.3s;
+}
+
+/* Dark mode (default) → white icons */
+body:not(.light-theme) .social-icons img {
+  filter: brightness(0) invert(1);
+}
+
+/* Light mode → dark icons */
+body.light-theme .social-icons img {
+  filter: brightness(0) invert(0);
+}
+
+/* Profile Container for Center & Justify */
+.profile-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: justify; /* Makes paragraph text justified */
+  line-height: 1.6;
+}
+
+.profile-container h2,
+.profile-container h3 {
+  text-align: center; /* Headings remain centered */
+  margin-bottom: 15px;
+}
+
+.profile-container p {
+  margin-bottom: 15px;
+}
+
+/* Keep social icons theme friendly */
+.social-icons img {
+  transition: transform 0.3s, filter 0.3s;
+}
+
+body:not(.light-theme) .social-icons img {
+  filter: brightness(0) invert(1); /* White icons for dark mode */
+}
+
+body.light-theme .social-icons img {
+  filter: brightness(0) invert(0); /* Dark icons for light mode */
+}
+
+/* Profile Heading */
+.profile-container h2 {
+  text-align: center;       /* Center the heading */
+  margin-bottom: 15px;
+  text-decoration: underline; /* Underline the heading */
+  text-underline-offset: 6px; /* Optional: spacing below the text */
+  text-decoration-thickness: 2px; /* Optional: thickness of underline */
+}
+
+/* About Me Heading */
+.main-content h1 {
+  text-align: center;             /* Center the heading */
+  text-decoration: underline;     /* Add underline */
+  text-underline-offset: 6px;     /* Optional: space below text */
+  text-decoration-thickness: 2px; /* Optional: thickness of underline */
+  margin-bottom: 20px;            /* Spacing below the heading */
+}
+
+.skills-title {
+  text-align: center;
+  font-size: 2rem;
+  color: #ff3333;
+  margin-bottom: 2rem;
+}
+
+.skills-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.skills-card {
+  background-color: #111;
+  border: 1px solid #ff3333;
+  border-radius: 8px;
+  padding: 1.5rem;
+  width: 300px;
+}
+
+.skills-card h2 {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.skill {
+  margin-bottom: 1rem;
+}
+
+.skill span {
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.bar {
+  background: #333;
+  border-radius: 4px;
+  overflow: hidden;
+  height: 6px;
+  margin-top: 4px;
+}
+
+.bar div {
+  height: 6px;
+  background: #ff3333;
+}
+
+/* ===== SERVICES TIMELINE STYLE ===== */
+.timeline {
+  position: relative;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 100%;
+  background: #ff0000; /* Red line */
+}
+
+.timeline-item {
+  position: relative;
+  width: 50%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.timeline-item:nth-child(odd) {
+  left: 0;
+  text-align: right;
+}
+
+.timeline-item:nth-child(even) {
+  left: 50%;
+}
+
+.timeline-icon {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background: #111;
+  color: #ff0000;
+  border: 2px solid #ff0000;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.timeline-content {
+  background: #0d0d0d;
+  border: 1px solid rgba(255, 0, 0, 0.4);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.timeline-content:hover {
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+  border-color: #ff0000;
+}
+
+.timeline-content h2 {
+  margin-top: 0;
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.timeline-content p {
+  color: #ccc;
+  font-size: 0.95rem;
+  margin: 10px 0 0;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .timeline::before {
+    left: 20px;
+  }
+  .timeline-item {
+    width: 100%;
+    padding-left: 50px;
+    text-align: left !important;
+    left: 0 !important;
+  }
+  .timeline-icon {
+    left: 20px;
+    transform: none;
+  }
+}
+

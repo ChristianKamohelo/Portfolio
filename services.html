@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <!-- Burger Button -->
+  <button type="button" class="burger" onclick="toggleSidebar()">
+    <img class="burger-avatar" src="./assets/avatar.png" />
+    <span class="burger-icon"></span>
+  </button>
+
+  <!-- Overlay -->
+  <div class="overlay" onclick="toggleSidebar()"></div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <img class="sidebar-avatar" src="./assets/photo.jpg" alt="Profile Photo" />
+    <div class="sidebar-username">Christian Kamohelo Nkoko</div>
+    <div class="sidebar-role">Software Developer</div>
+
+    <nav class="sidebar-menu">
+      <a href="index.html">
+        <button type="button">
+          <span class="material-symbols-outlined">home</span>
+          <span>Home</span>
+        </button>
+      </a>
+      <a href="services.html">
+        <button type="button" class="active">
+          <span class="material-symbols-outlined">build</span>
+          <span>Services</span>
+        </button>
+      </a>
+      <a href="about.html">
+        <button type="button">
+          <span class="material-symbols-outlined">person</span>
+          <span>Profile</span>
+        </button>
+      </a>
+      <a href="skills.html">
+        <button type="button">
+          <span class="material-symbols-outlined">star</span>
+          <span>Skills</span>
+        </button>
+      </a>
+    </nav>
+
+    <nav class="sidebar-menu bottom">
+      <a href="index.html">
+        <button type="button">
+          <span class="material-symbols-outlined">logout</span>
+          <span>Sign Out</span>
+        </button>
+      </a>
+    </nav>
+  </aside>
+
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Theme Toggle -->
+    <button id="theme-toggle" class="theme-toggle">🌙</button>
+
+    <h1 class="section-title">My Services</h1>
+    <div class="timeline">
+
+      <!-- Service 1 -->
+      <div class="timeline-item right">
+        <div class="timeline-content">
+          <h2>Web Development</h2>
+          <p>Responsive, high-performance websites and web applications tailored to your business needs, using modern frameworks and best practices.</p>
+        </div>
+      </div>
+
+      <!-- Service 2 -->
+      <div class="timeline-item left">
+        <div class="timeline-content">
+          <h2>Backend Development</h2>
+          <p>Scalable backend solutions with RESTful APIs, database design, and secure integrations to power your digital platforms.</p>
+        </div>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="timeline-item right">
+        <div class="timeline-content">
+          <h2>Mobile App Development</h2>
+          <p>Cross-platform mobile applications with sleek UI, smooth performance, and robust functionality for Android and iOS.</p>
+        </div>
+      </div>
+
+      <!-- Service 4 -->
+      <div class="timeline-item left">
+        <div class="timeline-content">
+          <h2>System Integration & Automation</h2>
+          <p>API integrations, process automation, and custom scripts to connect systems and streamline workflows.</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <script>
+    function toggleSidebar() {
+      document.body.classList.toggle("open");
+    }
+
+    // Theme toggle with persistence
+    (function () {
+      const themeToggle = document.getElementById("theme-toggle");
+      if (!themeToggle) return;
+
+      const applyTheme = (mode) => {
+        const isLight = mode === "light";
+        document.body.classList.toggle("light-theme", isLight);
+        themeToggle.textContent = isLight ? "☀️" : "🌙";
+      };
+
+      const saved = localStorage.getItem("theme");
+      applyTheme(saved === "light" ? "light" : "dark");
+
+      themeToggle.addEventListener("click", () => {
+        const isNowLight = !document.body.classList.contains("light-theme");
+        applyTheme(isNowLight ? "light" : "dark");
+        localStorage.setItem("theme", isNowLight ? "light" : "dark");
+      });
+    })();
+  </script>
+</body>
+</html>

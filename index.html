@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sidebar Dashboard</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <!-- Burger Button (Mobile Only) -->
+    <button type="button" class="burger" onclick="toggleSidebar()">
+      <img class="burger-avatar" src="./assets/avatar.png" />
+      <span class="burger-icon"></span>
+    </button>
+
+    <!-- Overlay -->
+    <div class="overlay" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <img class="sidebar-avatar" src="./assets/photo.jpg" alt="Profile Photo" />
+      <div class="sidebar-username">Christian Kamohelo Nkoko</div>
+      <div class="sidebar-role">Software Developer</div>
+
+    <nav class="sidebar-menu">
+      <a href="index.html">
+        <button type="button">
+          <span class="material-symbols-outlined">home</span>
+          <span>Home</span>
+        </button>
+      </a>
+      <a href="services.html">
+        <button type="button">
+          <span class="material-symbols-outlined">build</span>
+          <span>Services</span>
+        </button>
+      </a>
+      <a href="about.html">
+        <button type="button" class="active">
+          <span class="material-symbols-outlined">person</span>
+          <span>Profile</span>
+        </button>
+      </a>
+	  <a href="skills.html">
+        <button type="button">
+          <span class="material-symbols-outlined">star</span>
+          <span>Skills</span>
+        </button>
+      </a>
+    </nav>
+
+      <nav class="sidebar-menu bottom">
+	    <a href="index.html">
+        <button type="button">
+          <span class="material-symbols-outlined">logout</span>
+          <span>Sign Out</span>
+        </button>
+		</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+	  <button id="theme-toggle" class="theme-toggle">🌙</button>
+      <h1>Crafting Innovative Digital Solutions</h1>
+      <h3>Software Developer | Shaping the Future of Technology</h3>
+      <p>Get in Touch</p>
+
+        <div class="cta-buttons">
+		  <a href="https://wa.me/26659400531" target="_blank" class="contact-btn">Contact Me</a>
+		  <div class="social-icons">
+          <a href="https://www.linkedin.com/in/christian-nkoko-b475842b4/" target="_blank">
+            <img src="./assets/icon-linkedin.svg" alt="LinkedIn" />
+          </a>
+          <a href="https://github.com/ChristianKamohelo" target="_blank">
+            <img src="./assets/icon-github.svg" alt="GitHub" />
+          </a>
+          <a href="mailto:kamohelonkoko2@gmail.com">
+            <img src="./assets/icon-email.svg" alt="Email" />
+          </a>
+        </div>
+      </div>
+    </main>
+
+  <script>
+      // Sidebar toggle (single definition; avoid duplicate const declarations)
+      function toggleSidebar() {
+        document.body.classList.toggle("open");
+      }
+
+      // Theme toggle with persistence
+      (function () {
+        const themeToggle = document.getElementById("theme-toggle");
+        if (!themeToggle) return;
+
+        const applyTheme = (mode) => {
+          const isLight = mode === "light";
+          document.body.classList.toggle("light-theme", isLight);
+          themeToggle.textContent = isLight ? "☀️" : "🌙";
+        };
+
+        // Load saved preference (if any)
+        const saved = localStorage.getItem("theme");
+        applyTheme(saved === "light" ? "light" : "dark");
+
+        themeToggle.addEventListener("click", () => {
+          const isNowLight = !document.body.classList.contains("light-theme");
+          applyTheme(isNowLight ? "light" : "dark");
+          localStorage.setItem("theme", isNowLight ? "light" : "dark");
+        });
+      })();
+    </script>
+  </body>
+</html>
